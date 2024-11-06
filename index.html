@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oiko Lista de Tareas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body onload="time()">
+    <h1>Oiko App</h1>
+    <p>Organiza tus tareas del día en una súper lista</p>
+    <div class="todo-container">
+      <div class="date-hour">
+        <p id="date">date</p>
+        <p id="hour">hour</p>
+      </div>
+
+      <header>
+        <h1>To do list</h1>
+      </header>
+
+      <form action="" id="todo-form">
+        <p>Add your task here</p>
+        <div class="form-control">
+          <input
+            type="text"
+            id="todo-input"
+            placeholder="Type here about your next task"
+          />
+          <button type="submit">+</button>
+        </div>
+      </form>
+
+      <form action="" id="edit-form" class="hide">
+        <p>Edit your task</p>
+        <div class="form-control">
+          <input
+            type="text"
+            id="edit-input"
+            placeholder="Type here about your edit task"
+          />
+          <button type="submit">e</button>
+        </div>
+        <button type="button" id="cancel-edit-btn">cancel</button>
+      </form>
+
+      <div class="todo-list" id="todo-list">
+        <div class="todo">
+          <h3>some default task</h3>
+          <button class="finish-todo">c</button>
+          <button class="edit-todo">e</button>
+          <button class="remove-todo">x</button>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
 </html>

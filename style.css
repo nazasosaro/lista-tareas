@@ -5,154 +5,72 @@
 }
 
 body {
-    font-family: sans-serif;
-    background-color: antiquewhite;
-}
-
-.form-control {
-    display: flex;
-}
-
-.form-control input {
-    flex: 1;
-    outline: 0;
-    box-shadow: none;
-    border: 1px solid #858585;
-}
-
-.form-control button {
-    background-color: blueviolet;
-    border: 0px;
-}
-
-.form-control button:hover {
-    background-color: tomato;
-}
-
-.date-hour {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1rem 1rem 1.5rem 1rem;
-    font-size: 16px;
-    color: #102f5e;
-}
-
-#date {
-    flex: 1;
-}
-
-button {
-    background-color: darkorange;
-    color: #102f5e;
-    border: 2px solid #102f5e;
-    padding: 0.2rem 0.4rem;
-    font-size: .8rem;
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
-    transition: .4s;
-    border: 1px solid #f5800e;
-}
-
-button:hover {
-    background-color: orangered;
-    color: white;
-}
-
-button > i {
-    font-weight: bold;
-    pointer-events: none;
-}
-
-input {
-    padding: .4rem .5rem;
-}
-
-.hide {
-    display: none;
+  font-family: sans-serif;
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .todo-container {
-    background-color: #ecf0f1;
-    border-radius: 15px;
-    width: 450px;
-    margin: 3rem auto;
-    padding: 1.5rem;
+  background-color: #ecf0f1;
+  border-radius: 15px;
+  width: 450px;
+  margin: 3rem auto;
+  padding: 1.5rem;
 }
 
-.todo-container header {
-    padding-left: 0 1rem 1rem;
-    border-bottom: 1px solid #ccc;
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-header > h1 {
-    padding-left: 16px;
-    border-left: 1px solid #e74c3c;
+.todo-list {
+  list-style-type: none;
+  padding: 0;
 }
 
-#todo-form, #edit-form {
-    padding: 1rem;
-    border-bottom: 1px solid #ccc;
+.tarea {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  margin: 5px 0;
+  background-color: #e0e7ff;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-#todo-form > p, #edit-form > p {
-    margin-bottom: .5rem;
-    font-weight: bold;
+.tarea.completada {
+  background-color: green;
 }
 
-.form-control > input {
-    margin-right: .8rem;
+.tarea p {
+  width: 100%;
 }
 
-#cancel-edit-btn {
-    margin-top: 1rem;
+.tarea.completada p {
+  color: #a5a5a5;
+  text-decoration: line-through;
 }
 
-.todo {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: .3rem .2rem;
-    border-bottom: 1px solid #ddd;
-    transition: .3s;
+.tarea .botones button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
-.todo h3 {
-    flex: 1;
-    font-size: .9rem;
+.botones {
+  display: flex;
+  gap: 5px;
 }
 
-.todo button {
-    margin-left: .4rem;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: #ecf0f1;
+button {
+  cursor: pointer;
 }
 
-.done {
-    background-color: green;
-}
-
-.done h3 {
-    color: white;
-    text-decoration: line-through;
-    font-style: italic;
-}
-
-.todo button:hover, .done button {
-    background-color: #395169;
-    color: #ecf0f1;
-}
-
-.done > button:hover {
-    background-color: #ecf0f1;
-    color: #102f5e;
-}
-
-#todo-list {
-    max-height: 220px;
-    overflow: auto;
+footer {
+  margin-bottom: 2rem;
 }

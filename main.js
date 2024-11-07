@@ -1,130 +1,123 @@
-const data = new Date();
+document.addEventListener("DOMContentLoaded", () => {
+  const todoForm = document.querySelector("#todo-form");
+  const todoInput = document.querySelector("#todo-input");
+  const todoList = document.querySelector("#todo-list");
+  const contador = document.querySelector("#contador");
+  const ordenarBtn = document.querySelector("#ordenar");
 
-const todoForm = document.querySelector("#todo-form");
-const todoInput = document.querySelector("#todo-input");
-const todoList = document.querySelector("#todo-list");
-const editForm = document.querySelector("#edit-form");
-const editInput = document.querySelector("#edit-input");
-const cancelEditBtn = document.querySelector("#cancel-edit-btn");
+  let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
 
-let oldInputValue;
-
-const timeElapsed = Date.now();
-const today = new Date(timeElapsed);
-
-document.getElementById("date").innerHTML = today.toDateString();
-
-function time() {
-  const data = new Date();
-  let h = data.getHours();
-  let m = data.getMinutes();
-  let s = data.getSeconds();
-
-  if (h < 10) {
-    h = "0" + h;
-  }
-  if (m < 10) {
-    m = "0" + m;
-  }
-  if (s < 10) {
-    s = "0" + s;
+  function guardarTareas() {
+    localStorage.setItem("tareas", JSON.stringify(tareas));
   }
 
-  document.getElementById("hour").innerHTML = h + ":" + m + ":" + s;
-  setTimeout("time()", 500);
-}
-
-todoForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const inputValue = todoInput.value;
-  if (inputValue) {
-    saveTodo(inputValue); // save function
-  }
-});
-
-const saveTodo = (text) => {
-  const todo = document.createElement("div");
-  todo.classList.add("todo");
-
-  const todoTitle = document.createElement("h3");
-  todoTitle.innerText = text;
-  todo.appendChild(todoTitle);
-
-  const doneBtn = document.createElement("button");
-  doneBtn.classList.add("finish-todo");
-  doneBtn.innerHTML = "fi";
-  todo.appendChild(doneBtn);
-
-  const editBtn = document.createElement("button");
-  editBtn.classList.add("edit-todo");
-  editBtn.innerHTML = "ed";
-  todo.appendChild(editBtn);
-
-  const removeBtn = document.createElement("button");
-  removeBtn.classList.add("remove-todo");
-  removeBtn.innerHTML = "re";
-  todo.appendChild(removeBtn);
-
-  todoList.appendChild(todo);
-  todoInput.value = "";
-  todoInput.focus();
-};
-
-document.addEventListener("click", (e) => {
-  const targetEl = e.target;
-  const parentEl = targetEl.closest("div");
-  let todoTitle;
-
-  if (parentEl && parentEl.querySelector("h3")) {
-    todoTitle = parentEl.querySelector("h3").innerText;
+  function displayDate() {
+    let date = new Date();
+    date = date.toString().split(" ");
+    document.querySelector("#date-text").innerHTML = date[0];
+    document.querySelector("#date-month").innerHTML = date[1];
+    document.querySelector("#date-number").innerHTML = date[2];
+    document.querySelector("#date-year").innerHTML = date[3];
   }
 
-  if (targetEl.classList.contains("finish-todo")) {
-    parentEl.classList.toggle("done");
+  function actualizarContador() {
+    const completadas = tareas.filter((t) => t.completada).length;
+    contador.textContent = `${completadas} / ${tareas.length} tareas completadas`;
   }
 
-  if (targetEl.classList.contains("remove-todo")) {
-    parentEl.remove();
-  }
+  function refrescarListaTareas() {
+    todoList.innerHTML = "";
+    tareas.forEach((tarea, index) => {
+      const li = document.createElement("li");
+      li.className = "tarea" + (tarea.completada ? " completada" : "");
 
-  if (targetEl.classList.contains("edit-todo")) {
-    toggleForms();
-    editInput.value = todoTitle;
-    oldInputValue = todoTitle;
-  }
-});
+      const p = document.createElement("p");
+      p.textContent = tarea.texto;
 
-const toggleForms = () => {
-  editForm.classList.toggle("hide");
-  todoForm.classList.toggle("hide");
-  todoList.classList.toggle("hide");
-};
-
-cancelEditBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    toggleForms();
-})
-
-editForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const editInputValue = editInput.value;
-
-    if(editInputValue) {
-        updateTodo(editInputValue);  // update value function
-    }
-
-    toggleForms();
-})
-
-const updateTodo = (text => {
-    const todos = document.querySelectorAll(".todo");
-
-    todos.forEach((todo) => {
-        let todoTitle = todo.querySelector("h3");
-
-        if(todoTitle.innerText === oldInputValue) {
-            todoTitle.innerHTML = text;
+      p.addEventListener("click", () => {
+        if (!li.classList.contains("editando")) {
+          tarea.completada = !tarea.completada;
+          guardarTareas();
+          refrescarListaTareas();
+          actualizarContador();
         }
-    })
-})
+      });
+
+      const botones = document.createElement("div");
+      botones.classList.add("botones");
+
+      const editarBtn = document.createElement("button");
+      editarBtn.textContent = "Editar";
+      editarBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        activarModoEdicion(index, li, p);
+      });
+      botones.appendChild(editarBtn);
+
+      const eliminarBtn = document.createElement("button");
+      eliminarBtn.textContent = "Eliminar";
+      eliminarBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        eliminarTarea(index);
+      });
+      botones.appendChild(eliminarBtn);
+
+      li.appendChild(p);
+      li.appendChild(botones);
+
+      todoList.appendChild(li);
+    });
+  }
+
+  todoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const texto = todoInput.value.trim();
+    if (texto) {
+      tareas.push({ texto, completada: false });
+      todoInput.value = "";
+      guardarTareas();
+      refrescarListaTareas();
+      actualizarContador();
+    }
+  });
+
+  function activarModoEdicion(index, li, span) {
+    const tarea = tareas[index];
+
+    li.classList.add("editando");
+    span.innerHTML = `<textarea rows="3">${tarea.texto}</textarea>`;
+
+    const guardarBtn = document.createElement("button");
+    guardarBtn.textContent = "Guardar";
+    guardarBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const nuevoTexto = span.querySelector("textarea").value.trim();
+      if (nuevoTexto) {
+        tarea.texto = nuevoTexto;
+        li.classList.remove("editando");
+        guardarTareas();
+        refrescarListaTareas();
+      }
+    });
+
+    const botones = li.querySelector(".botones");
+    botones.replaceChild(guardarBtn, botones.firstChild);
+  }
+
+  function eliminarTarea(index) {
+    tareas.splice(index, 1);
+    guardarTareas();
+    refrescarListaTareas();
+    actualizarContador();
+  }
+
+  ordenarBtn.addEventListener("click", () => {
+    tareas.sort((a, b) => a.completada - b.completada);
+    guardarTareas();
+    refrescarListaTareas();
+  });
+
+  displayDate();
+  refrescarListaTareas();
+  actualizarContador();
+});

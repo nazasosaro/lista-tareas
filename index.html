@@ -6,53 +6,47 @@
     <title>Oiko Lista de Tareas</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body onload="time()">
-    <h1>Oiko App</h1>
-    <p>Organiza tus tareas del día en una súper lista</p>
-    <div class="todo-container">
-      <div class="date-hour">
-        <p id="date">date</p>
-        <p id="hour">hour</p>
-      </div>
+  <body>
+    <main>
+      <div class="todo-container">
+        <div class="date-container">
+          <div class="date-right">
+            <div id="date-number"></div>
+            <div>
+              <div id="date-month"></div>
+              <div id="date-year"></div>
+            </div>
+          </div>
+          <div id="date-text"></div>
+        </div>
 
-      <header>
-        <h1>To do list</h1>
-      </header>
-
-      <form action="" id="todo-form">
-        <p>Add your task here</p>
-        <div class="form-control">
+        <h1>Oiko App</h1>
+        <p>Organiza tus tareas del día en una súper lista</p>
+        <p id="contador">0 / 0 tareas completadas</p>
+        <form id="todo-form">
           <input
             type="text"
             id="todo-input"
-            placeholder="Type here about your next task"
+            placeholder="Nueva tarea"
+            required
           />
-          <button type="submit">+</button>
-        </div>
-      </form>
-
-      <form action="" id="edit-form" class="hide">
-        <p>Edit your task</p>
-        <div class="form-control">
-          <input
-            type="text"
-            id="edit-input"
-            placeholder="Type here about your edit task"
-          />
-          <button type="submit">e</button>
-        </div>
-        <button type="button" id="cancel-edit-btn">cancel</button>
-      </form>
-
-      <div class="todo-list" id="todo-list">
-        <div class="todo">
-          <h3>some default task</h3>
-          <button class="finish-todo">c</button>
-          <button class="edit-todo">e</button>
-          <button class="remove-todo">x</button>
-        </div>
+          <button type="submit">Agregar Tarea</button>
+          <button type="button" id="ordenar">Ordenar</button>
+        </form>
+        <ul class="todo-list" id="todo-list"></ul>
       </div>
-    </div>
+    </main>
+    <footer>
+      <p>
+        <span>Code by Naza Sosa. </span>
+        <span>
+          <a href="https://github.com/nazasosaro/lista-tareas" target="_blank"
+            >Open-sourced on Github</a
+          >
+        </span>
+      </p>
+    </footer>
+
     <script src="main.js"></script>
   </body>
 </html>

@@ -30,40 +30,44 @@
   <body>
     <div class="page-container">
       <main>
-        <div class="todo-container">
-          <div class="date-container">
-            <div class="date-right">
-              <div id="date-number" class="date-number"></div>
-              <div>
-                <div id="date-month" class="date-month"></div>
-                <div id="date-year" class="date-year"></div>
+        <div class="container">
+          <div class="todo-container">
+            <div class="date-container">
+              <div class="date-right">
+                <div id="date-number" class="date-number"></div>
+                <div>
+                  <div id="date-month" class="date-month"></div>
+                  <div id="date-year" class="date-year"></div>
+                </div>
               </div>
+              <div id="date-text" class="date-text"></div>
             </div>
-            <div id="date-text" class="date-text"></div>
-          </div>
 
-          <div>
-            <h1 class="title-app">Capitareas App</h1>
-            <p class="subtitle-app">Capi te ayuda a organizar tu día</p>
-          </div>
+            <div>
+              <h1 class="title-app">Capitareas App</h1>
+              <p class="subtitle-app">Capi te ayuda a organizar tu día</p>
+            </div>
 
-          <form class="todo-form" id="todo-form">
-            <input
-              class="todo-input"
-              type="text"
-              id="todo-input"
-              placeholder="Nueva tarea"
-              required
-            />
-            <button class="btn-add" type="submit">
-              <img src="icons/plus-1.svg" class="icon-add" alt="" />
-            </button>
-            <button class="btn-sort" type="button" id="ordenar">Ordenar</button>
-          </form>
-          <p class="contador" id="contador">0 / 0 tareas completadas</p>
-          <ul class="todo-list" id="todo-list"></ul>
-          <div class="todo-image">
-            <img class="todo-img" src="images/capybara.png" alt="capybara" />
+            <form class="todo-form" id="todo-form">
+              <input
+                class="todo-input"
+                type="text"
+                id="todo-input"
+                placeholder="Nueva tarea"
+                required
+              />
+              <button class="btn-add" type="submit">
+                <img src="icons/plus-1.svg" class="icon-add" alt="" />
+              </button>
+              <button class="btn-sort" type="button" id="ordenar">
+                Ordenar
+              </button>
+            </form>
+            <p class="contador" id="contador">0 / 0 tareas completadas</p>
+            <ul class="todo-list" id="todo-list"></ul>
+            <div class="todo-image">
+              <img class="todo-img" src="images/capybara.png" alt="capybara" />
+            </div>
           </div>
         </div>
       </main>

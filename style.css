@@ -3,14 +3,9 @@
   --secondary: #582a57;
   --primary-light: #ffba70;
   --secondary-light: #d995dd;
-  --color1: #ffba70;
-  --color2: #582a57;
-  --color11: #e6b7eca1;
-  --color22: #463c7b;
-  --light: #fff;
-  --dark: #000;
+  --white: #fff;
+  --light: #eee;
   --border-radius-btn: 0.5rem;
-  --disabled: #e7e7e7;
 }
 
 * {
@@ -49,7 +44,7 @@ body {
 }
 
 h1 {
-  color: #eee;
+  color: var(--light);
   margin-top: 1rem;
 }
 
@@ -83,9 +78,9 @@ textarea:focus-visible {
 .todo-container {
   background-color: transparent;
   backdrop-filter: blur(15px);
-  border: 2px solid var(--color1);
+  border: 2px solid var(--primary-light);
   border-radius: 1.5rem;
-  width: 450px;
+  max-width: 450px;
   margin: 3rem auto;
   padding: 1.5rem;
 }
@@ -144,9 +139,9 @@ textarea:focus-visible {
   flex-grow: 1;
   outline: none;
   background-color: transparent;
-  border: 2px solid var(--color1);
+  border: 2px solid var(--primary-light);
   font-size: 1rem;
-  color: #eee;
+  color: var(--light);
   border-radius: 2rem;
   padding: 0.8rem 1rem;
 }
@@ -171,7 +166,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color1);
+  background-color: var(--primary-light);
   border-radius: 50%;
   width: 2.5rem;
   height: 2.5rem;
@@ -194,7 +189,7 @@ textarea:focus-visible {
 }
 
 .btn-sort:hover {
-  background-color: var(--color1);
+  background-color: var(--primary-light);
   color: var(--secondary);
 }
 
@@ -205,9 +200,9 @@ textarea:focus-visible {
 }
 
 .contador {
-  color: #eee;
+  color: var(--light);
   background-color: #f05606;
-  border: 2px solid var(--color1);
+  border: 2px solid var(--primary-light);
   border-radius: 2rem;
   padding: 0.6rem;
   margin-bottom: 1rem;
@@ -224,9 +219,9 @@ textarea:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  background-color: var(--color2);
+  background-color: var(--secondary);
   border-radius: 0.5rem;
-  border: 2px solid var(--color1);
+  border: 2px solid var(--primary-light);
   color: #fff;
   cursor: pointer;
   padding: 10px 12px;
@@ -247,7 +242,7 @@ textarea:focus-visible {
 }
 
 .todo:hover {
-  background-color: var(--color1);
+  background-color: var(--primary-light);
 }
 
 .todo.done {
@@ -271,8 +266,8 @@ textarea:focus-visible {
 .btn-edit,
 .btn-delete,
 .btn-save {
-  color: var(--light);
-  border: 1px solid #eee;
+  color: var(--white);
+  border: 1px solid var(--light);
   border-radius: var(--border-radius-btn);
   font-size: 0.85rem;
   font-weight: 600;
@@ -304,14 +299,14 @@ textarea:focus-visible {
 
 .btn-delete:hover {
   background-color: var(--primary);
-  border: 1px solid #eee;
-  color: var(--light);
+  border: 1px solid var(--light);
+  color: var(--white);
 }
 
 .btn-save:hover {
   background-color: var(--secondary);
-  color: var(--light);
-  border: 1px solid var(--light);
+  color: var(--white);
+  border: 1px solid var(--white);
 }
 
 .todo-image {
@@ -331,7 +326,7 @@ footer {
 }
 
 footer span {
-  color: #eee;
+  color: var(--light);
 }
 
 footer a {
@@ -343,4 +338,84 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle-app {
+    font-size: 1rem;
+  }
+
+  .date-number {
+    font-size: 2.5rem;
+  }
+
+  .date-month,
+  .date-year,
+  .date-text {
+    font-size: 1rem;
+  }
+
+  .todo-input {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+
+  .todo-img {
+    width: 60%;
+    margin: 1rem auto;
+  }
+
+  .contador {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0 1rem;
+  }
+
+  .date-number {
+    font-size: 2rem;
+  }
+
+  .todo-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "input add"
+      "sort sort";
+  }
+
+  .todo-input {
+    grid-area: input;
+  }
+
+  .btn-add {
+    grid-area: add;
+  }
+
+  .btn-sort {
+    grid-area: sort;
+    width: 100%; 
+  }
+
+  .contador {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+
+  .botones {
+    flex-direction: column;
+  }
+
+  .todo-img {
+    width: 80%;
+  }
 }

@@ -12,12 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayDate() {
-    let date = new Date();
-    date = date.toString().split(" ");
-    document.querySelector("#date-text").innerHTML = date[0];
-    document.querySelector("#date-month").innerHTML = date[1];
-    document.querySelector("#date-number").innerHTML = date[2];
-    document.querySelector("#date-year").innerHTML = date[3];
+    const date = new Date();
+    const weekday = date.toLocaleDateString("es-ES", { weekday: "long" });
+    const day = date.getDate();
+    const month = date.toLocaleDateString("es-ES", { month: "short" });
+    const year = date.getFullYear();
+
+    document.querySelector("#date-text").innerHTML = weekday;
+    document.querySelector("#date-number").innerHTML = day;
+    document.querySelector("#date-month").innerHTML = month;
+    document.querySelector("#date-year").innerHTML = year;
   }
 
   function actualizarContador() {
@@ -29,13 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
     todoList.innerHTML = "";
     tareas.forEach((tarea, index) => {
       const li = document.createElement("li");
-      li.className = "tarea" + (tarea.completada ? " completada" : "");
+      li.className = "todo" + (tarea.completada ? " done" : "");
 
       const p = document.createElement("p");
       p.textContent = tarea.texto;
 
       p.addEventListener("click", () => {
-        if (!li.classList.contains("editando")) {
+        if (!li.classList.contains("editing")) {
           tarea.completada = !tarea.completada;
           guardarTareas();
           refrescarListaTareas();
@@ -47,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       botones.classList.add("botones");
 
       const editarBtn = document.createElement("button");
+      editarBtn.classList.add("btn-edit");
       editarBtn.textContent = "Editar";
       editarBtn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -55,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       botones.appendChild(editarBtn);
 
       const eliminarBtn = document.createElement("button");
+      eliminarBtn.classList.add("btn-delete");
       eliminarBtn.textContent = "Eliminar";
       eliminarBtn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -84,17 +90,18 @@ document.addEventListener("DOMContentLoaded", () => {
   function activarModoEdicion(index, li, span) {
     const tarea = tareas[index];
 
-    li.classList.add("editando");
+    li.classList.add("editing");
     span.innerHTML = `<textarea rows="3">${tarea.texto}</textarea>`;
 
     const guardarBtn = document.createElement("button");
+    guardarBtn.classList.add("btn-save");
     guardarBtn.textContent = "Guardar";
     guardarBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       const nuevoTexto = span.querySelector("textarea").value.trim();
       if (nuevoTexto) {
         tarea.texto = nuevoTexto;
-        li.classList.remove("editando");
+        li.classList.remove("editing");
         guardarTareas();
         refrescarListaTareas();
       }

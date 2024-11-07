@@ -3,49 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Oiko Lista de Tareas</title>
+    <title>Capitareas App</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main>
-      <div class="todo-container">
-        <div class="date-container">
-          <div class="date-right">
-            <div id="date-number"></div>
-            <div>
-              <div id="date-month"></div>
-              <div id="date-year"></div>
+    <div class="page-container">
+      <main>
+        <div class="todo-container">
+          <div class="date-container">
+            <div class="date-right">
+              <div id="date-number" class="date-number"></div>
+              <div>
+                <div id="date-month" class="date-month"></div>
+                <div id="date-year" class="date-year"></div>
+              </div>
             </div>
+            <div id="date-text" class="date-text"></div>
           </div>
-          <div id="date-text"></div>
-        </div>
 
-        <h1>Oiko App</h1>
-        <p>Organiza tus tareas del día en una súper lista</p>
-        <p id="contador">0 / 0 tareas completadas</p>
-        <form id="todo-form">
-          <input
-            type="text"
-            id="todo-input"
-            placeholder="Nueva tarea"
-            required
-          />
-          <button type="submit">Agregar Tarea</button>
-          <button type="button" id="ordenar">Ordenar</button>
-        </form>
-        <ul class="todo-list" id="todo-list"></ul>
-      </div>
-    </main>
-    <footer>
-      <p>
-        <span>Code by Naza Sosa. </span>
-        <span>
-          <a href="https://github.com/nazasosaro/lista-tareas" target="_blank"
-            >Open-sourced on Github</a
-          >
-        </span>
-      </p>
-    </footer>
+          <div>
+            <h1 class="title-app">Capitareas App</h1>
+            <p class="subtitle-app">Capi te ayuda a organizar tu día</p>
+          </div>
+
+          <form class="todo-form" id="todo-form">
+            <input
+              class="todo-input"
+              type="text"
+              id="todo-input"
+              placeholder="Nueva tarea"
+              required
+            />
+            <button class="btn-add" type="submit">
+              <img src="icons/plus-1.svg" class="icon-add" alt="" />
+            </button>
+            <button class="btn-sort" type="button" id="ordenar">Ordenar</button>
+          </form>
+          <p class="contador" id="contador">0 / 0 tareas completadas</p>
+          <ul class="todo-list" id="todo-list"></ul>
+          <div class="todo-image">
+            <img class="todo-img" src="images/capybara.png" alt="capybara" />
+          </div>
+        </div>
+      </main>
+      <footer>
+        <p>
+          <span>Code by Naza Sosa. </span>
+          <span>
+            <a href="https://github.com/nazasosaro/lista-tareas" target="_blank"
+              >Open-sourced on Github</a
+            >
+          </span>
+        </p>
+      </footer>
+    </div>
 
     <script src="main.js"></script>
   </body>
